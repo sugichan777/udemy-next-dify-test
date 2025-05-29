@@ -1,0 +1,2 @@
+# 自動生成コードを ESLint の対象外にする
+src/generated/**
