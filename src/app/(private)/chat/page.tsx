@@ -1,7 +1,10 @@
 import ChatContainer from "@/components/ChatContainer"
+import { auth } from "@/auth"
 
-export default function Chatpage() {
+export default async function Chatpage() {
+    const session = await auth()
+    const userId = session?.user?.id as string
   return (
-    <ChatContainer />
+    <ChatContainer userId={userId} />
   )
 }
