@@ -1,10 +1,23 @@
 import ChatContainer from "@/components/ChatContainer"
 import { auth } from "@/auth"
 
-export default async function Chatpage() {
+type Params = {
+  params: Promise<{
+    conversationId: string
+  }>
+}
+
+export default async function Chatpage({params}: Params) {
     const session = await auth()
     const userId = session?.user?.id as string
+
+    const { conversationId } = await params
+
   return (
-    <ChatContainer userId={userId} />
+    <ChatContainer
+      isNewChat={false}
+      initialMessages={[]}
+      conversationId={conversationId}
+      userId={userId} />
   )
 }
