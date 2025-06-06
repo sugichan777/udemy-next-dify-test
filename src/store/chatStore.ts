@@ -12,7 +12,7 @@ export type Message = {
 export type Conversation = {
     id?: string;
     name: string;
-    updatedAt: number
+    updated_at: number;
 }
 
 // ストアの状態の型を定義 
@@ -28,7 +28,7 @@ interface ChatStore {
     setMessages: (message: Message[]) => void;
     addMessage: (message: Message) => void;
     clearMessage: () => void;
-    setConversations: (vonversation: Conversation[]) => void;
+    setConversations: (conversation: Conversation[]) => void;
     setLoading: (loading: boolean) => void;
     resetStore: () => void
 }
@@ -56,7 +56,7 @@ export const useChatStore = create<ChatStore>()(
         resetStore:() => set({
             conversationId: null,
             messages: [],
-            conversations: [],
+            // conversations: [],
             isLoading: false
         })
     }),{
