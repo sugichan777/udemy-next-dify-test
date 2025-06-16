@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
 
 
   
-  // ここを追記
+  // AIにより、ここを追記しました。
   eslint: {
     // ビルド時の ESLint エラーを無視する
     ignoreDuringBuilds: true,

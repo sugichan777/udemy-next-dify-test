@@ -23,6 +23,7 @@ export async function createConversation(data: ChatFlowType, userId: string, que
     })
 }
 
+
 export async function updateConversation(data: ChatFlowType, userId: string){
     await prisma.conversation.update({
         where: {

@@ -6,6 +6,8 @@ import { useChatStore } from "@/store/chatStore"
 
 export default function ChatContainer({ 
   isNewChat,
+  initialMessages,
+  conversationId,
   userId
  }: ChatContainerProps) {
 
@@ -13,24 +15,35 @@ export default function ChatContainer({
   const {
     messages,
     isLoading,
-    conversationId: storeConversationId,
     setConversationId,
     setMessages,
     clearMessage
     } = useChatStore()
 
-  const end0fMessagesRef = useRef<HTMLDivElement>(null)
+  const endOfMessagesRef = useRef<HTMLDivElement>(null)
 
   useEffect(()=>{
-    end0fMessagesRef.current?.scrollIntoView({ behavior: 'smooth'})
+    endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth'})
   }, [ messages ])
+
+  const initialLoaded = useRef(false)                           // AIの指示による
   
   useEffect(()=>{
     if(isNewChat){
       clearMessage()
       setConversationId('')
     }
-  }, [isNewChat, clearMessage, setConversationId])
+    if(conversationId){
+      setConversationId(conversationId)
+    }
+    // if(initialMessages && initialMessages.length > 0){         // 講座流
+    if(!initialLoaded.current && initialMessages.length > 0){　   // AIの指示による
+      setMessages(initialMessages)
+      
+      initialLoaded.current = true                                // AIの指示による
+    }
+  }, [isNewChat, clearMessage, setConversationId,
+    initialMessages, conversationId, setMessages])
 
 
   return (
@@ -50,21 +63,21 @@ export default function ChatContainer({
       ) : (
         messages.map((message, index)=>(
           <div key={index} className={`
-            flex ${message.role === 'user' ? 'justify-end' : 'justtify-start' } mb-4
+            flex ${message.role === 'user' ? 'justify-end' : 'justify-start' } mb-4
             `}>
               <div className={`rounded-lg py-3 px-4 max-w-[80%] ${
                 message.role === 'user'
-               ? 'bg-blue-100 text-gray-800'
-               : 'bg-white text gray-800'
-               }`}>
-                  <p className="whitespace-pre-qrap">{message.content}</p>
+                ? 'bg-blue-100 text-gray-800'
+                : 'bg-white text-gray-800'
+              }`}>
+                  <p className="whitespace-pre-wrap">{message.content}</p>
                 </div>
               </div>
         ))
       ) }
 
 
-    <div ref={end0fMessagesRef} />
+    <div ref={endOfMessagesRef} />
 
     {/* ローディングインジケーター */}
     {isLoading && (
@@ -72,8 +85,8 @@ export default function ChatContainer({
           <div className="bg-white text-gray-800 px-4 py-3 rounded-lg rounded-tl-none">
             <div className="flex space-x-2">
               <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animationdelay:0.2s]"></div>
-              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animationdelay:0.4s]"></div>
+              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.2s]"></div>
+              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.4s]"></div>
             </div>
           </div>
         </div>

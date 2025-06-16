@@ -1,15 +1,16 @@
-import { NextRequest,NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { createConversation, updateConversation } from "@/lib/conversation"
-const endpoint =  `${process.env.DIFY_API_URL}/chat-messages`
+
+const endpoint = `${process.env.DIFY_API_URL}/chat-messages`
 const DIFY_API_KEY = process.env.DIFY_API_KEY
 
 export async function POST(request: NextRequest){
 
     try{
         const body = await request.json()
-        const {query, userId,conversationId } = body
+        const {query, userId, conversationId } = body
 
-        // DIfyワークフローAPI接続
+        // DifyワークフローAPI接続
         const response = await fetch(endpoint, {
             method: 'POST',
             headers: {
@@ -18,10 +19,10 @@ export async function POST(request: NextRequest){
             },
             body: JSON.stringify({
                 inputs: {},
-                    query: query,
+                query: query,
                 response_mode: 'blocking',
                 user: userId,
-                conversation_id: conversationId ||''
+                conversation_id: conversationId || ''
             })
         })
 

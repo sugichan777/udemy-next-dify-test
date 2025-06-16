@@ -1,5 +1,6 @@
 import ChatSidebar from "@/components/ChatSidebar";
 import { auth } from "@/auth"
+
 export default async function PrivateLayout({
     children,
   }: Readonly<{

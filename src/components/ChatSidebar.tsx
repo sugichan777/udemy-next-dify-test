@@ -14,11 +14,11 @@ const  router = useRouter()
 
 const { setConversations, conversations, conversationId, resetStore } = useChatStore()
 
-const[ isLoading, setIsloading] = useState(false)
+const[ isLoading, setIsLoading] = useState(false)
 
 const fetchConversations = async () => {
   try {
-    setIsloading(true)
+    setIsLoading(true)
     const response = await fetch(`/api/conversations?userId=${userId}`)
     const data = await response.json()
 
@@ -34,9 +34,9 @@ const fetchConversations = async () => {
   }
 
   } catch(error){
-    console.error('会話リスト取得に失敗しました：', error)
+    console.error('会話リスト取得に失敗しました!', error)
   } finally{
-    setIsloading(false)
+    setIsLoading(false)
   }
 }
 
@@ -60,7 +60,7 @@ const handleNewChat = () => {
       </div>
       <div className="flex-1 overflow-y-auto px-2 mb-2">
         <div className="flex justify-between items-center px-2 mb-2">
-          <h3 className="text-sm font-medium">会話履歴</h3>
+          <h3 className="text-sm font-medium">★　会 話 履 歴 　★</h3>
         </div>
         { isLoading && conversations.length === 0 ? (
           <div className="text-center py-4 text-gray-500">読み込み中...</div>
@@ -69,18 +69,19 @@ const handleNewChat = () => {
         ) : (
           <ul className="space-y-1">
             {conversations.map((conversation) => (
-              <Link href={`/chat/${conversation.id}`}
-                className={`
-                  flex items-center p-2 my-2 text-sm rounded-lg hover:bg-slate-200
-                  ${conversationId === conversation.id ? 'bg-slate-200' : ''}`}
-                  >
+              <li key={conversation.id} className="relative">
+                <Link href={`/chat/${conversation.id}`}
+                  className={`
+                    flex items-center p-2 my-2 text-sm rounded-lg hover:bg-slate-200
+                    ${conversationId === conversation.id ? 'bg-slate-200' : ''}`}
+                    >
                     <div className="flex-1">
-                      <p className="truecate font-medium">{conversation.name}</p>
+                      <p className="truncate font-medium">{conversation.name}</p>
                     </div>
                   </Link>
+              </li>
             ))}
           </ul>
-
         )}
     </div>
   </div>

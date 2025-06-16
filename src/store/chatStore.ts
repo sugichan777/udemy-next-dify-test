@@ -12,7 +12,7 @@ export type Message = {
 export type Conversation = {
     id?: string;
     name: string;
-    updated_at: number;
+    updated_at: number;    //Atは76.の7:37で_atに変更
 }
 
 // ストアの状態の型を定義 
@@ -20,7 +20,7 @@ interface ChatStore {
     //　状態
     conversationId: string | null;
     isLoading: boolean;
-    messages: Message[],
+    messages: Message[];
     conversations: Conversation[];
 
     // アクション

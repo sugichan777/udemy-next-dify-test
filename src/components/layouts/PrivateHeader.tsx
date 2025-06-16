@@ -22,7 +22,7 @@ export default async function PrivateHeader() {
                         <NavigationMenuLink asChild>
 
                             <Link href="/dashboard" className="font-bold text-xl">
-                                管理ページ 
+                                Private 管理ページ 
                             </Link> 
                         </NavigationMenuLink>
 

@@ -15,13 +15,15 @@ export default function PublicHeader() {
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <NavigationMenu>
           <NavigationMenuList>
+
             <NavigationMenuItem>
-              <Link href="/" legacyBehavior passHref>
-                <NavigationMenuLink className="font-bold text-xl">
-                  Blog
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink asChild>
+                <Link href="/" className="font-bold text-xl">
+                  Public Blog
+                </Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
+
           </NavigationMenuList>
         </NavigationMenu>
 

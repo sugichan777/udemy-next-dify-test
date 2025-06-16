@@ -1,5 +1,6 @@
-import { NextRequest,NextResponse } from "next/server"
-const endpoint =  `${process.env.DIFY_API_URL}/conversations`
+import { NextRequest, NextResponse } from "next/server"
+
+const endpoint = `${process.env.DIFY_API_URL}/conversations`
 const DIFY_API_KEY = process.env.DIFY_API_KEY
 
 export async function GET(request: NextRequest){
@@ -9,7 +10,7 @@ export async function GET(request: NextRequest){
         const userId = searchParams.get('userId')
         
 
-        // DIfyワークフローAPI接続
+        // DifyワークフローAPI接続
         const response = await fetch(`${endpoint}?user=${userId}&limit=50`, {
             method: 'GET',
             headers: {
