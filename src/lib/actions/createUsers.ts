@@ -58,14 +58,22 @@ export async function createUser(
         return handleError({email: ['このメールアドレスはすでに登録されています']})
     }
 
-// DBに登録
+
+// DBに登録（UserとSubscriptionを同時に作成）
 const hashedPassword = await bcryptjs.hash(rawFormData.password, 12)
 
 await prisma.user.create({
     data: {
         name: rawFormData.name,
         email: rawFormData.email,
-        password: hashedPassword
+        password: hashedPassword,
+        // デフォルトのFREEプランのSubscriptionも同時に作成
+        subscription: {
+            create: {
+                plan: 'FREE',
+                status: 'ACTIVE'
+            }
+        }
     }
 })
 

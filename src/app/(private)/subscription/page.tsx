@@ -78,7 +78,7 @@ const handleSubscribe = async () => {
                 <div className="bg-slate-50 p-4 rounded mb-6">
                     <h2 className="text-xl font-semibold mb-2">Proプラン</h2>
                     <p className="text-gray-600 mb-4">より多くの会話と高度な機能を利用できます</p>
-                    <div className="text-3xl font-bold mb-4">$5<span className="text-lg textgray-500">/月</span></div>
+                    <div className="text-3xl font-bold mb-4">$5<span className="text-lg text-gray-500">/月</span></div>
                 </div>
             </CardContent>
             <CardFooter className="flex flex-col gap-4">
