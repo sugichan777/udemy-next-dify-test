@@ -51,7 +51,7 @@ export async function createUser(
     }
     
     // DBにメールアドレスが存在しているかの確認
-    const existingUser =await prisma.user.findUnique({
+    const existingUser = await prisma.user.findUnique({
         where : { email: rawFormData.email }
     })
     if(existingUser){

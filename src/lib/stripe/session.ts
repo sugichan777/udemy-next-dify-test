@@ -53,3 +53,14 @@ export async function createCheckoutSession(userId: string, stripeCustomerId: st
         } } })
  return checkoutSession;
 }
+
+
+
+// Stripe顧客ID取得
+   export async function getStripeCustomerId(userId: string){
+      const customer = await prisma.stripeCustomer.findUnique({
+         where: { userId }
+      })
+
+      return customer?.stripeCustomerId
+   }
